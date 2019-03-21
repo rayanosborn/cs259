@@ -1,0 +1,112 @@
+/**
+* CS259 Formal Languages Coursework
+* Author - Rayan Osborn
+* Date Last Modified - 18.03.19
+**/
+
+PARSER_BEGIN(Assignment)
+
+import java.io.*;
+import java.util.regex.*;
+
+public class Assignment{
+
+	public static void main(String[] args){
+		if ( args.length < 1 ) {
+       System.out.println("Please pass in the filename for a parameter.");
+    	 System.exit(1);
+    }
+		else {
+			System.out.println("Reading from file: " + args[0]);
+			Assignment parser = new Assignment(System.in);
+			InputStreamReader isr = new InputStreamReader(System.in);
+			Token t = getToken(0);
+			System.out.println(t);
+		}
+	}
+
+}
+
+PARSER_END(Assignment)
+
+SKIP :
+{
+  " "
+}
+
+TOKEN:
+{
+	<EOL: "\n">
+}
+
+TOKEN :
+{
+	<PLUS:"+">
+}
+
+TOKEN :
+{
+	<MULT:"*">
+}
+
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+}
+
+TOKEN:
+{
+	<DEF:"DEF">
+}
+
+TOKEN:
+{
+	<MAIN:"MAIN">
+}
+
+
+TOKEN:
+{
+	<FUNC_NAME:(["A"-"Z"])+>
+}
+
+TOKEN:
+{
+	<PARAM:["a"-"z"]>
+}
+
+TOKEN:
+{
+	<S_COLON:";">
+}
+
+TOKEN:
+{
+	<L_BRACE:"(">
+}
+
+TOKEN:
+{
+	<R_BRACE:")">
+}
+
+
+void Start():{
+	Token t;
+	int i;
+	int val;
+}
+{
+	<DEF>
+}
+
+
+
+// int Expression(){
+// 	int i;
+// 	int val;
+// }
+// {
+//
+// }
